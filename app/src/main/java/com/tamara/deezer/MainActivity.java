@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
         String [] res = songInfo.split("\\|");
         String bpm = res[0];
 
-        builder.setContentTitle("Song bpm")
-                .setContentText("The song bpm is " + bpm)
+        builder.setContentTitle("Song BPM")
+                .setContentText(res[1] + " by " + res[2] + " has a " + bpm + "bpm.")
                 .setSmallIcon(R.drawable.ic_baseline_album_24);
         builder.setAutoCancel(true);
 
@@ -87,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("artist", res[2]);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-
-        //builder.addAction(R.drawable.ic_baseline_add_24, "Add song", pendingIntent);
         builder.setContentIntent(pendingIntent);
 
         Notification notification = builder.build();
@@ -104,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("TAMI", songInfo);
 
         builder.setContentTitle("Song bpm")
-                .setContentText("The song bpm is " + res2[0])
+                .setContentText(res2[1] + " by " + res2[2] + " has a " + res2[0] + "bpm.")
                 .setSmallIcon(R.drawable.ic_baseline_album_24);
         builder.setAutoCancel(true);
 
@@ -120,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        //builder.addAction(R.drawable.ic_baseline_add_24, "See info", pendingIntent);
         builder.setContentIntent(pendingIntent);
 
         Notification notification = builder.build();
