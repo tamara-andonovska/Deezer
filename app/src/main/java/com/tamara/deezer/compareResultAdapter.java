@@ -12,25 +12,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class searchResultAdapter extends RecyclerView.Adapter<searchResultAdapter.MyViewHolder> {
+public class compareResultAdapter extends RecyclerView.Adapter<compareResultAdapter.MyViewHolder> {
 
     ArrayList<String> songs;
     Context context;
 
-    public searchResultAdapter(Context context, ArrayList<String> songs){
+    public compareResultAdapter(Context context, ArrayList<String> songs){
         this.context = context;
         this.songs = songs;
     }
 
     @NonNull
     @Override
-    public searchResultAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public compareResultAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.song, parent, false);
-        return new MyViewHolder(v).linkAdapter(this);
+        return new compareResultAdapter.MyViewHolder(v).linkAdapter(this);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull searchResultAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull compareResultAdapter.MyViewHolder holder, int position) {
         String song = songs.get(position);
         String [] s = song.split("\\|");
         holder.id.setText(s[0]);
@@ -46,7 +46,7 @@ public class searchResultAdapter extends RecyclerView.Adapter<searchResultAdapte
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private searchResultAdapter searchResultAdapter;
+        private compareResultAdapter compareResultAdapter;
         TextView id, title, artist, album;
         Button bpm;
 
@@ -61,13 +61,14 @@ public class searchResultAdapter extends RecyclerView.Adapter<searchResultAdapte
             bpm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new RestGetSongBpm(id.getText().toString(), itemView.getContext()).execute();
+                    String prevSongInfo = CompareResultActivity.getPrevSongInfo();
+                    new RestGetSongBpm2(prevSongInfo, id.getText().toString(), itemView.getContext()).execute();
                 }
             });
         }
 
-        public MyViewHolder linkAdapter(searchResultAdapter searchResultAdapter){
-            this.searchResultAdapter = searchResultAdapter;
+        public compareResultAdapter.MyViewHolder linkAdapter(compareResultAdapter compareResultAdapter){
+            this.compareResultAdapter = compareResultAdapter;
             return this;
         }
     }

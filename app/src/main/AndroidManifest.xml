@@ -13,6 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Deezer">
         <activity
+            android:name=".ComparisonActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CompareResultActivity"
+            android:exported="true" />
+        <activity
+            android:name=".BpmActivity"
+            android:exported="true" />
+        <activity
             android:name=".SearchResultActivity"
             android:exported="true" />
         <activity

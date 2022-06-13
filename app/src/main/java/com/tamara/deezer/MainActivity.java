@@ -5,9 +5,6 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        name = findViewById(R.id.name);
+        name = findViewById(R.id.title);
         artist = findViewById(R.id.artist);
 
         search = findViewById(R.id.search);
@@ -73,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void scheduleJob(String name, String artist) {
 
-        new RestGet(name, artist, MainActivity.this).execute();
+        new RestGetSongs(name, artist, MainActivity.this).execute();
 
 //        Log.d("TAMI", "scheduling job...");
 //        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
@@ -87,15 +84,22 @@ public class MainActivity extends AppCompatActivity {
 
     //baranje 3: notifikacija
     //se povikuva vo onPostExecute, za da se pojavi pri zavrsuvanje na baranje 1 i 2
-    public static void sendNotification(String bpm, Context context) {
+    public static void sendNotification(String songInfo, Context context) {
         Log.d("TAMI", "preparing notification...");
+
+        String [] res = songInfo.split("\\|");
+        String bpm = res[0];
+
         builder.setContentTitle("Song bpm")
                 .setContentText("The song bpm is " + bpm)
                 .setSmallIcon(R.drawable.ic_baseline_album_24);
         builder.setAutoCancel(true);
 
-        Intent intent = new Intent(context, MainActivity.class); //nekoja druga aktivnost da prakja
+        Intent intent = new Intent(context, BpmActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("bpm", bpm);
+        intent.putExtra("title", res[1]);
+        intent.putExtra("artist", res[2]);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         builder.addAction(R.drawable.ic_baseline_add_24, "Add song", pendingIntent);
@@ -103,6 +107,37 @@ public class MainActivity extends AppCompatActivity {
         Notification notification = builder.build();
         manager.notify(NOTIFICATION_ID, notification);
         Log.d("TAMI", "notification sent...");
+    }
+
+    public static void updateNotification(String prevSongInfo, String songInfo, Context context){
+        String [] res1 = prevSongInfo.split("\\|");
+        String [] res2 = songInfo.split("\\|");
+        Log.d("TAMI", prevSongInfo);
+        Log.d("TAMI", songInfo);
+
+        builder.setContentTitle("Song bpm")
+                .setContentText("The song bpm is " + res2[0])
+                .setSmallIcon(R.drawable.ic_baseline_album_24);
+        builder.setAutoCancel(true);
+
+        Intent intent = new Intent(context, ComparisonActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("bpm2", res2[0]);
+        intent.putExtra("title2", res2[1]);
+        intent.putExtra("artist2", res2[2]);
+
+        //ovie treba da se vlecat
+        intent.putExtra("bpm1", res1[0]);
+        intent.putExtra("title1", res1[1]);
+        intent.putExtra("artist1", res1[2]);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        builder.addAction(R.drawable.ic_baseline_add_24, "See info", pendingIntent);
+
+        Notification notification = builder.build();
+        manager.notify(NOTIFICATION_ID, notification);
+        Log.d("TAMI", "notification updated...");
     }
 
     @Override

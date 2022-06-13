@@ -4,17 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".BpmActivity">
+
+    <TextView
+        android:id="@+id/title1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="dummy"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/artist1"/>
+
+    <TextView
+        android:id="@+id/artist1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="dummy"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title1"/>
+
+    <TextView
+        android:id="@+id/bpm1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="dummy"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/artist1"/>
 
     <EditText
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="title"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/artist"/>
+        app:layout_constraintTop_toBottomOf="@id/bpm1"/>
 
     <EditText
         android:id="@+id/artist"
@@ -26,10 +53,10 @@
         app:layout_constraintTop_toBottomOf="@id/title"/>
 
     <Button
-        android:id="@+id/search"
+        android:id="@+id/compare_bpm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search"
+        android:text="Compare songs"
         app:layout_constraintTop_toBottomOf="@id/artist"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />

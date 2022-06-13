@@ -34,6 +34,8 @@ public class NetworkUtilsBpm {
 
         //json object-ot sto se vrakja
         double bpm = 0.0;
+        String title = null;
+        String artist = null;
 
         String returnValue = null; //bpm vo string format
 
@@ -53,9 +55,11 @@ public class NetworkUtilsBpm {
 
             JSONObject data = new JSONObject(response);
             bpm = data.getDouble("bpm");
+            title = data.getString("title");
+            artist = data.getJSONObject("artist").getString("name");
 
             Log.d("TAMI", bpm+""); //0.0 vrakja zaso taka e na stranata
-            returnValue = Double.toString(bpm);
+            returnValue = bpm + "|" + title + "|" + artist;
 
         } catch (IOException | JSONException e) {
             e.printStackTrace();

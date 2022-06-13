@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RestGet extends AsyncTask<Void, Void, ArrayList<String>> {
+public class RestGetSongs extends AsyncTask<Void, Void, ArrayList<String>> {
 
     String name, artist;
     Context context;
 
-    public RestGet(String name, String artist, Context context) {
+    public RestGetSongs(String name, String artist, Context context) {
         this.context = context;
         this.name = name;
         this.artist = artist;
