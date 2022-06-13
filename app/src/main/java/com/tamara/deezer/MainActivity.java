@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,12 +23,10 @@ import androidx.core.app.NotificationCompat;
 public class MainActivity extends AppCompatActivity {
 
     private String sharedPrefFile = "com.tamara.deezer";
-    //SharedPreferences preferences;
 
     EditText name, artist;
     Button search;
 
-    private static final int JOB_ID = 1;
     private static NotificationCompat.Builder builder;
     private static NotificationManager manager;
     private static final int NOTIFICATION_ID = 0;
@@ -46,12 +45,11 @@ public class MainActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String searchName = name.getText().toString();
                 String searchArtist = artist.getText().toString();
                 Log.d("TAMI", "in main: " + searchName + " " + searchArtist);
 
-                scheduleJob(searchName, searchArtist);
+                getSongs(searchName, searchArtist);
             }
         });
 
@@ -67,23 +65,10 @@ public class MainActivity extends AppCompatActivity {
         builder = new NotificationCompat.Builder(this, "123");
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void scheduleJob(String name, String artist) {
-
+    private void getSongs(String name, String artist) {
         new RestGetSongs(name, artist, MainActivity.this).execute();
-
-//        Log.d("TAMI", "scheduling job...");
-//        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-//        ComponentName serviceName = new ComponentName(getPackageName(), MyJobService.class.getName());
-//        JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, serviceName);
-//        //baranje 4: da se izvrsat 1,2,3 samo ako baterijata e polna
-//        builder.setRequiresBatteryNotLow(true);
-//        JobInfo jobInfo = builder.build();
-//        scheduler.schedule(jobInfo);
     }
 
-    //baranje 3: notifikacija
-    //se povikuva vo onPostExecute, za da se pojavi pri zavrsuvanje na baranje 1 i 2
     public static void sendNotification(String songInfo, Context context) {
         Log.d("TAMI", "preparing notification...");
 
@@ -102,9 +87,12 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("artist", res[2]);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        builder.addAction(R.drawable.ic_baseline_add_24, "Add song", pendingIntent);
+
+        //builder.addAction(R.drawable.ic_baseline_add_24, "Add song", pendingIntent);
+        builder.setContentIntent(pendingIntent);
 
         Notification notification = builder.build();
+
         manager.notify(NOTIFICATION_ID, notification);
         Log.d("TAMI", "notification sent...");
     }
@@ -126,14 +114,14 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("title2", res2[1]);
         intent.putExtra("artist2", res2[2]);
 
-        //ovie treba da se vlecat
         intent.putExtra("bpm1", res1[0]);
         intent.putExtra("title1", res1[1]);
         intent.putExtra("artist1", res1[2]);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        builder.addAction(R.drawable.ic_baseline_add_24, "See info", pendingIntent);
+        //builder.addAction(R.drawable.ic_baseline_add_24, "See info", pendingIntent);
+        builder.setContentIntent(pendingIntent);
 
         Notification notification = builder.build();
         manager.notify(NOTIFICATION_ID, notification);

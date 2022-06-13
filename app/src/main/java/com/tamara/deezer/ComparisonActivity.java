@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ComparisonActivity extends AppCompatActivity {
 
     TextView title1, title2, artist1, artist2, bpm1, bpm2;
-    //dve kopcinja za comparison za da se izmeni?
+    Button compareAgain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,16 @@ public class ComparisonActivity extends AppCompatActivity {
         artist2.setText(a2);
         bpm1.setText(b1);
         bpm2.setText(b2);
+
+        compareAgain = findViewById(R.id.compare_again);
+        compareAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ComparisonActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
 
     }
 }

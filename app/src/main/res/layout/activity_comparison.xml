@@ -11,6 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="dummy"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -20,6 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="dummy"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title1"/>
@@ -29,24 +35,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="dummy"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/artist1"/>
+
+    <TextView
+        android:id="@+id/vs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VS"
+        android:textStyle="bold|italic"
+        app:flow_horizontalAlign="center"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bpm1"/>
 
     <TextView
         android:id="@+id/title2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="dummy"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bpm1"/>
+        app:layout_constraintTop_toBottomOf="@id/vs"/>
 
     <TextView
         android:id="@+id/artist2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="dummy"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title2"/>
@@ -56,8 +86,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="dummy"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/artist2"/>
+
+    <Button
+        android:id="@+id/compare_again"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Compare other songs"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

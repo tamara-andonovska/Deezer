@@ -11,6 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="dummy"
+        android:padding="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -21,6 +24,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="dummy"
+        android:padding="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title1"/>
@@ -30,6 +36,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="dummy"
+        android:padding="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/artist1"/>
@@ -39,6 +48,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="title"
+        android:padding="10dp"
+        android:layout_margin="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bpm1"/>
@@ -48,6 +59,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="artist"
+        android:padding="10dp"
+        android:layout_margin="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"/>
@@ -57,7 +70,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Compare songs"
-        app:layout_constraintTop_toBottomOf="@id/artist"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
